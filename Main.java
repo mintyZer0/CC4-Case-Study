@@ -24,6 +24,9 @@ public class Main {
     System.out.println("\nRemoving patient B002 (Bob)...\n");
     hospital.RemovePatient("B002");
 
+    System.out.println("\nRemoving patient D004 (Dave)...\n");
+    hospital.RemovePatient("D004");
+
     System.out.println("--- Patient queue (after removal) ---");
     hospital.DisplayQueue();
 

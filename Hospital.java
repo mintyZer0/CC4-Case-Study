@@ -9,13 +9,13 @@ public class Hospital {
   public Hospital() {
     dummy = new PatientNode(null, null, null);
     tail = dummy;
-    len += 1;
   }
 
   public void AddPatientEnd(String id, String name, String condition) {
     PatientNode newNode = new PatientNode(id, name, condition);
     tail.next = newNode;
     tail = newNode;
+    len += 1;
   }
 
   public void AddPatientFront(String id, String name, String condition) {
