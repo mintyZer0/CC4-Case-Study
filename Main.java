@@ -4,6 +4,9 @@ public class Main {
     // Simple test driver for the Hospital class
     Hospital hospital = new Hospital();
 
+    System.out.println("--- Empty Thing ---");
+    hospital.DisplayQueue();
+
     // Add patients to the end
     hospital.AddPatientEnd("A001", "Alice", "Stable");
     hospital.AddPatientEnd("B002", "Bob", "Recovering");
@@ -36,5 +39,7 @@ public class Main {
 
     System.out.println("--- Final queue ---");
     hospital.DisplayQueue();
+
+    hospital.AddPatientAfter("M000", "F006", "Jeffrey", "Critical");
   }
 }
