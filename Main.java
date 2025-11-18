@@ -1,45 +1,70 @@
+import java.util.Scanner;
+
 public class Main {
 
   public static void main(String[] args) {
-    // Simple test driver for the Hospital class
-    Hospital hospital = new Hospital();
+    Scanner sc = new Scanner(System.in);
+    Hospital queue = new Hospital();
+    int choice;
 
-    System.out.println("--- Empty Thing ---");
-    hospital.DisplayQueue();
+    do {
+      System.out.println("===== Hospital Patient Queue System =====");
+      System.out.println("1. Add Patient (End)");
+      System.out.println("2. Add Critical Patient (Front)");
+      System.out.println("3. Add Patient After Another");
+      System.out.println("4. Remove Patient");
+      System.out.println("5. Display Queue");
+      System.out.println("0. Exit");
+      System.out.print("Enter your choice: ");
+      choice = sc.nextInt();
+      sc.nextLine();
 
-    // Add patients to the end
-    hospital.AddPatientEnd("A001", "Alice", "Stable");
-    hospital.AddPatientEnd("B002", "Bob", "Recovering");
-
-    // Add a patient to the front (higher priority)
-    hospital.AddPatientFront("C003", "Carol", "Observation");
-
-    // Add a critical patient (convenience method)
-    hospital.AddCriticalPatient("D004", "Dave");
-
-    // Insert after an existing patient
-    hospital.AddPatientAfter("A001", "E005", "Eve", "Stable");
-
-    System.out.println("--- Patient queue (after additions) ---");
-    hospital.DisplayQueue();
-
-    // Remove a patient (tail or middle)
-    System.out.println("\nRemoving patient B002 (Bob)...\n");
-    hospital.RemovePatient("B002");
-
-    System.out.println("\nRemoving patient D004 (Dave)...\n");
-    hospital.RemovePatient("D004");
-
-    System.out.println("--- Patient queue (after removal) ---");
-    hospital.DisplayQueue();
-
-    // Try removing a non-existent patient (no-op in current implementation)
-    System.out.println("\nAttempting to remove non-existent patient Z999...");
-    hospital.RemovePatient("Z999");
-
-    System.out.println("--- Final queue ---");
-    hospital.DisplayQueue();
-
-    hospital.AddPatientAfter("M000", "F006", "Jeffrey", "Critical");
+      switch (choice) {
+        case 1: {
+          System.out.print("Enter ID: ");
+          String id = sc.nextLine();
+          System.out.print("Enter Name: ");
+          String name = sc.nextLine();
+          System.out.print("Enter Condition (Normal/Urgent/Critical): ");
+          String condition = sc.nextLine();
+          queue.AddPatientEnd(id, name, condition);
+          break;
+        }
+        case 2: {
+          System.out.print("Enter ID: ");
+          String id = sc.nextLine();
+          System.out.print("Enter Name: ");
+          String name = sc.nextLine();
+          queue.AddCriticalPatient(id, name);
+          break;
+        }
+        case 3: {
+          System.out.print("Enter Existing Patient ID: ");
+          String existingID = sc.nextLine();
+          System.out.print("Enter New Patient ID: ");
+          String id = sc.nextLine();
+          System.out.print("Enter Name: ");
+          String name = sc.nextLine();
+          System.out.print("Enter Condition (Normal/Urgent/Critical): ");
+          String condition = sc.nextLine();
+          queue.AddPatientAfter(existingID, id, name, condition);
+          break;
+        }
+        case 4: {
+          System.out.print("Enter Patient ID to Remove: ");
+          String id = sc.nextLine();
+          queue.RemovePatient(id);
+          break;
+        }
+        case 5:
+          queue.DisplayQueue();
+          break;
+        case 0:
+          System.out.println("Exiting... Thank you!");
+          break;
+        default:
+          System.out.println("Invalid choice, please try again.");
+      }
+    } while (choice != 0);
   }
 }
