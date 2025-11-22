@@ -1,0 +1,1 @@
+rootProject.name = "CC4-Case-Study"
