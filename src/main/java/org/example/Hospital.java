@@ -1,3 +1,5 @@
+package org.example;
+
 public class Hospital {
 
   private PatientNode dummy;
@@ -75,6 +77,22 @@ public class Hospital {
       tail = dummy;
     }   
   }
+
+    public String getDisplayQueue() {
+        if (dummy.next == null) {
+            return "No patients in queue.\n";
+        }
+
+        PatientNode cur = dummy.next;
+        int i = 1;
+        String output = "";
+        while (cur != null) {
+             output += String.format("Patient #%d, %s %s, %s\n", i++, cur.data.name, cur.data.id, cur.data.condition);
+            cur = cur.next;
+        }
+        return output;
+    }
+
 
   public void DisplayQueue() {
     if (dummy.next == null) {
