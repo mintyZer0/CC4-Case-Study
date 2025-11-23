@@ -1,23 +1,22 @@
 package org.example.gui.panels;
 
 import org.example.Hospital;
-import org.example.gui.panels.OutputPanel;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class AddPatientEnd extends JPanel {
+public class AddCriticalPatient extends JPanel {
     String[] conditions = {"Normal", "Urgent", "Critical"};
     Hospital hospital;
 
-    public AddPatientEnd(Hospital hospital, OutputPanel outputPanel) {
+    public AddCriticalPatient(Hospital hospital, OutputPanel outputPanel) {
         this.hospital = hospital;
         this.setLayout(new GridBagLayout());
 
         JPanel fieldsPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-        JLabel operationLabel = new JLabel("Add Patient to End");
+        JLabel operationLabel = new JLabel("Add Critical Patient");
         JLabel titleLabel = new JLabel("Input ID");
         JLabel nameLabel = new JLabel("Input Name");
         JLabel conditionLabel = new JLabel("Select Condition");
@@ -26,6 +25,9 @@ public class AddPatientEnd extends JPanel {
         JTextField nameField = new JTextField(15);
 
         JComboBox comboBox = new JComboBox(conditions);
+        comboBox.setSelectedItem(conditions[2]);
+        comboBox.disable();
+
         JButton addButton = new JButton("Add");
 
         addButton.addActionListener(e ->{
@@ -33,12 +35,12 @@ public class AddPatientEnd extends JPanel {
             String name = nameField.getText();
             String condition = comboBox.getSelectedItem().toString();
 
-            if((id != null && !id.isEmpty()) && (name != null && !name.isEmpty()) && (condition != null && !condition.isEmpty())) {
-                hospital.AddPatientEnd(id, name, condition);
+            if((id != null && !id.isEmpty()) && (name != null && !name.isEmpty())) {
+                hospital.AddCriticalPatient(id, name);
                 String output = ("Adding Patient: " + id + " " + name + " " + condition);
                 outputPanel.appendText(output);
             }else {
-                JOptionPane.showMessageDialog(AddPatientEnd.this, ("Please fill all the fields\n" + "Must be a non-empty string"));
+                JOptionPane.showMessageDialog(AddCriticalPatient.this, ("Please fill all the fields\n" + "Must be a non-empty string"));
             }
         });
 
@@ -81,4 +83,5 @@ public class AddPatientEnd extends JPanel {
 
         this.add(fieldsPanel);
     }
+
 }
