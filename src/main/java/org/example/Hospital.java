@@ -55,7 +55,7 @@ public class Hospital {
       }
     }
 
-  public void RemovePatient(String id) {    
+  public void RemovePatient(String id) {
     PatientNode cur = dummy.next;
     PatientNode prev = dummy;
     boolean found = false;
@@ -70,12 +70,23 @@ public class Hospital {
       prev = cur;  
       cur = cur.next;
     }
+    if (dummy.next == null) {
+          tail = dummy;
+      }
     if (!found) {
       System.out.println("No patient found with ID: " + id);
-    }    
-    if (dummy.next == null) {
-      tail = dummy;
-    }   
+    }
+  }
+
+  public Boolean patientExists(String id) {
+    PatientNode cur = dummy.next;
+    while (cur != null) {
+      if (cur.data.id().equals(id)) {
+          return true;
+      }
+      cur = cur.next;
+    }
+      return false;
   }
 
     public String getDisplayQueue() {
@@ -87,7 +98,7 @@ public class Hospital {
         int i = 1;
         String output = "";
         while (cur != null) {
-             output += String.format("Patient #%d, %s %s, %s\n", i++, cur.data.name, cur.data.id, cur.data.condition);
+             output += String.format("Patient #%d, %s, %s, %s\n", i++, cur.data.name, cur.data.id, cur.data.condition);
             cur = cur.next;
         }
         return output;

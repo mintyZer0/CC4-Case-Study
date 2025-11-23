@@ -36,9 +36,14 @@ public class AddPatientAfter extends JPanel {
             String condition = comboBox.getSelectedItem().toString();
 
             if((existingId != null && !existingId.isEmpty()) && (id != null && !id.isEmpty()) && (name != null && !name.isEmpty()) && (condition != null && !condition.isEmpty())) {
-                hospital.AddPatientAfter(existingId, id, name, condition);
-                String output = ("Adding Patient: " + id + " " + name + " after " + existingId);
-                outputPanel.appendText(output);
+                if (hospital.patientExists(existingId)){
+                    hospital.AddPatientAfter(existingId, id, name, condition);
+                    String output = ("Adding Patient: " + id + " " + name + " after " + existingId);
+                    outputPanel.appendText(output);
+
+                }else{
+                    JOptionPane.showMessageDialog(null, "Patient ID doesn't exist");
+                }
             }else {
                 JOptionPane.showMessageDialog(AddPatientAfter.this, ("Please fill all the fields\n" + "All fields must be a non-empty string"));
             }

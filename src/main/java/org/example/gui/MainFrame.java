@@ -1,10 +1,7 @@
 package org.example.gui;
 import javax.swing.*;
 import org.example.Hospital;
-import org.example.gui.panels.AddCriticalPatient;
-import org.example.gui.panels.AddPatientAfter;
-import org.example.gui.panels.AddPatientEnd;
-import org.example.gui.panels.OutputPanel;
+import org.example.gui.panels.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,6 +15,7 @@ public class MainFrame extends JFrame{
     AddPatientEnd addPatientEnd = new AddPatientEnd(hospital, outputPanel);
     AddCriticalPatient addCriticalPatient = new AddCriticalPatient(hospital, outputPanel);
     AddPatientAfter addPatientAfter= new AddPatientAfter(hospital, outputPanel);
+    RemovePatient removePatient = new RemovePatient(hospital, outputPanel);
     CardLayout cardLayout = new CardLayout();
     JSplitPane splitPane;
 
@@ -33,6 +31,7 @@ public class MainFrame extends JFrame{
         mainPanel.add(addPatientEnd, "addPatientEnd");
         mainPanel.add(addCriticalPatient, "addCriticalPatient");
         mainPanel.add(addPatientAfter, "addPatientAfter");
+        mainPanel.add(removePatient, "removePatient");
 
         cardLayout.show(mainPanel, "addPatientEnd");
 
@@ -77,6 +76,10 @@ public class MainFrame extends JFrame{
             System.out.println("Switching to AddPatientAfter");
             setDisplay("addPatientAfter");
         }) ;
+       removePatient.addActionListener(e -> {
+           System.out.println("Switching to removePatient");
+           setDisplay("removePatient");
+       });
 
         displayQueue.addActionListener(e -> {
             outputPanel.appendText(hospital.getDisplayQueue());
