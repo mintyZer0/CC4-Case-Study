@@ -1,4 +1,5 @@
 package org.example.gui.panels;
+
 import org.example.Hospital;
 
 import javax.swing.*;
@@ -27,7 +28,11 @@ public class OutputPanel extends JPanel {
 
     // Appends text to the text area
     public void appendText(String text) {
-        textArea.append(text+ "\n");
+        textArea.append(text + "\n");
         textArea.getText();
+    }
+
+    public void clearTerminal() {
+        textArea.setText("");
     }
 }

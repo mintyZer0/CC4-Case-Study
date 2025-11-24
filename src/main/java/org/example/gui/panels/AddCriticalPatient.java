@@ -36,32 +36,32 @@ public class AddCriticalPatient extends JPanel {
         JButton addButton = new JButton("Add");
 
         // Action listener for the add button
-        addButton.addActionListener(e ->{
+        addButton.addActionListener(e -> {
             String id = idField.getText();
             String name = nameField.getText();
             String condition = comboBox.getSelectedItem().toString();
 
             // Check for empty fields
-            if((id != null && !id.isEmpty()) && (name != null && !name.isEmpty())) {
-                if(!hospital.patientExists(id)){
+            if ((id != null && !id.isEmpty()) && (name != null && !name.isEmpty())) {
+                if (!hospital.patientExists(id)) {
                     hospital.AddCriticalPatient(id, name);
                     String output = ("Adding Patient: " + id + " " + name + " " + condition);
                     outputPanel.appendText(output);
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Patient ID already exists");
                 }
-            }else {
+            } else {
                 JOptionPane.showMessageDialog(AddCriticalPatient.this, ("Please fill all the fields\n" + "Must be a non-empty string"));
             }
         });
 
         operationLabel.setFont(new Font("Dialog", Font.BOLD, 20));
 
-        gbc.insets = new Insets(10,10,10,10);
+        gbc.insets = new Insets(10, 10, 10, 10);
         // Add components to the panel
         // Change grid width to center operation label
-        gbc.gridx=0;
-        gbc.gridy=0;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
         fieldsPanel.add(operationLabel, gbc);
@@ -69,26 +69,26 @@ public class AddCriticalPatient extends JPanel {
         gbc.gridwidth = 1;
         gbc.anchor = GridBagConstraints.WEST;
 
-        gbc.gridx=0;
-        gbc.gridy=1;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
         fieldsPanel.add(titleLabel, gbc);
-        gbc.gridy=2;
+        gbc.gridy = 2;
         fieldsPanel.add(nameLabel, gbc);
-        gbc.gridy=3;
+        gbc.gridy = 3;
         fieldsPanel.add(conditionLabel, gbc);
 
-        gbc.gridx=1;
-        gbc.gridy=1;
+        gbc.gridx = 1;
+        gbc.gridy = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         fieldsPanel.add(idField, gbc);
-        gbc.gridy=2;
+        gbc.gridy = 2;
         fieldsPanel.add(nameField, gbc);
-        gbc.gridy=3;
+        gbc.gridy = 3;
         fieldsPanel.add(comboBox, gbc);
 
-        gbc.gridx=0;
-        gbc.gridy=4;
-        gbc.gridwidth=2;
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.CENTER;
         fieldsPanel.add(addButton, gbc);

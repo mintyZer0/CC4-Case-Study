@@ -1,5 +1,7 @@
 package org.example.gui;
+
 import javax.swing.*;
+
 import org.example.Hospital;
 import org.example.gui.panels.*;
 
@@ -8,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 // Main frame of the application
-public class MainFrame extends JFrame{
+public class MainFrame extends JFrame {
     Hospital hospital = new Hospital();
 
     // Panels
@@ -16,13 +18,13 @@ public class MainFrame extends JFrame{
     OutputPanel outputPanel = new OutputPanel(hospital);
     AddPatientEnd addPatientEnd = new AddPatientEnd(hospital, outputPanel);
     AddCriticalPatient addCriticalPatient = new AddCriticalPatient(hospital, outputPanel);
-    AddPatientAfter addPatientAfter= new AddPatientAfter(hospital, outputPanel);
+    AddPatientAfter addPatientAfter = new AddPatientAfter(hospital, outputPanel);
     RemovePatient removePatient = new RemovePatient(hospital, outputPanel);
     CardLayout cardLayout = new CardLayout();
     JSplitPane splitPane;
 
 
-    public MainFrame(String title){
+    public MainFrame(String title) {
         super();
         this.setTitle(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,18 +51,17 @@ public class MainFrame extends JFrame{
         createMenuBar();
 
 
-
     }
 
     // Creates the menu bar
-    public void createMenuBar(){
+    public void createMenuBar() {
         JMenuBar menuBar = new JMenuBar();
 
         // Add menu
         JMenu add = new JMenu("Add");
         JMenuItem addPatientEnd = new JMenuItem("Add Patient End");
         JMenuItem addCriticalPatient = new JMenuItem("Add Critical Patient");
-        JMenuItem addPatientAfter =  new JMenuItem("Add Patient After");
+        JMenuItem addPatientAfter = new JMenuItem("Add Patient After");
 
         // Remove menu
         JMenu remove = new JMenu("Remove");
@@ -70,29 +71,34 @@ public class MainFrame extends JFrame{
         // Display menu
         JMenu display = new JMenu("Display");
         JMenuItem displayQueue = new JMenuItem("Display Queue");
+        JMenuItem clearTerminal = new JMenuItem("Clear");
         display.add(displayQueue);
+        display.add(clearTerminal);
 
         // Action listeners for menu items
-       addPatientEnd.addActionListener(e -> {
-           System.out.println("Switching to addPatientEnd");
-           setDisplay("addPatientEnd");
-       }) ;
-       addCriticalPatient.addActionListener(e -> {
-           System.out.println("Switching to addCriticalPatient");
-           setDisplay("addCriticalPatient");
-        }) ;
+        addPatientEnd.addActionListener(e -> {
+            System.out.println("Switching to addPatientEnd");
+            setDisplay("addPatientEnd");
+        });
+        addCriticalPatient.addActionListener(e -> {
+            System.out.println("Switching to addCriticalPatient");
+            setDisplay("addCriticalPatient");
+        });
 
-       addPatientAfter.addActionListener(e -> {
+        addPatientAfter.addActionListener(e -> {
             System.out.println("Switching to AddPatientAfter");
             setDisplay("addPatientAfter");
-        }) ;
-       removePatient.addActionListener(e -> {
-           System.out.println("Switching to removePatient");
-           setDisplay("removePatient");
-       });
+        });
+        removePatient.addActionListener(e -> {
+            System.out.println("Switching to removePatient");
+            setDisplay("removePatient");
+        });
 
         displayQueue.addActionListener(e -> {
             outputPanel.appendText(hospital.getDisplayQueue());
+        });
+        clearTerminal.addActionListener(e -> {
+            outputPanel.clearTerminal();
         });
 
         // Add menus to menu bar
@@ -106,7 +112,7 @@ public class MainFrame extends JFrame{
     }
 
     // Sets the displayed panel
-    public void setDisplay(String display){
+    public void setDisplay(String display) {
         cardLayout.show(mainPanel, display);
     }
 
