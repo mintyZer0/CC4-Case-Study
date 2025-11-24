@@ -5,6 +5,7 @@ import org.example.Hospital;
 import javax.swing.*;
 import java.awt.*;
 
+// Panel for removing a patient
 public class RemovePatient extends JPanel {
     String[] conditions = {"Normal", "Urgent", "Critical"};
     Hospital hospital;
@@ -16,17 +17,23 @@ public class RemovePatient extends JPanel {
         JPanel fieldsPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
+        // Labels
         JLabel operationLabel = new JLabel("Remove Patient");
         JLabel titleLabel = new JLabel("Input ID");
 
+        // Text fields
         JTextField idField = new JTextField(15);
 
+        // Remove button
         JButton addButton = new JButton("Remove");
 
+        // Action listener for the remove button
         addButton.addActionListener(e ->{
             String id = idField.getText();
 
+            // Check for empty fields
             if((id != null && !id.isEmpty())) {
+                // Check if patient exists
                 if (hospital.patientExists(id)){
                     hospital.RemovePatient(id);
                     String output = ("Removing Patient with ID: " + id);
@@ -43,6 +50,8 @@ public class RemovePatient extends JPanel {
 
         gbc.insets = new Insets(10,10,10,10);
 
+        // Add components to the panel
+        // Change grid width to center operation label
         gbc.gridx=0;
         gbc.gridy=0;
         gbc.gridwidth = 2;

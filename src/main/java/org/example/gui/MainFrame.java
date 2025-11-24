@@ -7,9 +7,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// Main frame of the application
 public class MainFrame extends JFrame{
     Hospital hospital = new Hospital();
 
+    // Panels
     JPanel mainPanel = new JPanel();
     OutputPanel outputPanel = new OutputPanel(hospital);
     AddPatientEnd addPatientEnd = new AddPatientEnd(hospital, outputPanel);
@@ -27,6 +29,7 @@ public class MainFrame extends JFrame{
         this.setLayout(new BorderLayout());
         this.setSize(800, 600);
 
+        // Set up main panel with card layout
         mainPanel.setLayout(cardLayout);
         mainPanel.add(addPatientEnd, "addPatientEnd");
         mainPanel.add(addCriticalPatient, "addCriticalPatient");
@@ -36,6 +39,7 @@ public class MainFrame extends JFrame{
         cardLayout.show(mainPanel, "addPatientEnd");
 
 
+        // Set up split pane
         splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, mainPanel, outputPanel);
         splitPane.setResizeWeight(0.6);
         splitPane.setDividerSize(3);
@@ -47,22 +51,28 @@ public class MainFrame extends JFrame{
 
 
     }
+
+    // Creates the menu bar
     public void createMenuBar(){
         JMenuBar menuBar = new JMenuBar();
 
+        // Add menu
         JMenu add = new JMenu("Add");
         JMenuItem addPatientEnd = new JMenuItem("Add Patient End");
         JMenuItem addCriticalPatient = new JMenuItem("Add Critical Patient");
         JMenuItem addPatientAfter =  new JMenuItem("Add Patient After");
 
+        // Remove menu
         JMenu remove = new JMenu("Remove");
         JMenuItem removePatient = new JMenuItem("Remove Patient");
         remove.add(removePatient);
 
+        // Display menu
         JMenu display = new JMenu("Display");
         JMenuItem displayQueue = new JMenuItem("Display Queue");
         display.add(displayQueue);
 
+        // Action listeners for menu items
        addPatientEnd.addActionListener(e -> {
            System.out.println("Switching to addPatientEnd");
            setDisplay("addPatientEnd");
@@ -85,6 +95,7 @@ public class MainFrame extends JFrame{
             outputPanel.appendText(hospital.getDisplayQueue());
         });
 
+        // Add menus to menu bar
         add.add(addPatientEnd);
         add.add(addCriticalPatient);
         add.add(addPatientAfter);
@@ -93,6 +104,8 @@ public class MainFrame extends JFrame{
         menuBar.add(display);
         setJMenuBar(menuBar);
     }
+
+    // Sets the displayed panel
     public void setDisplay(String display){
         cardLayout.show(mainPanel, display);
     }

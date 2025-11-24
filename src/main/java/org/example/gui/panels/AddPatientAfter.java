@@ -5,6 +5,7 @@ import org.example.Hospital;
 import javax.swing.*;
 import java.awt.*;
 
+// Panel for adding a patient after an existing patient
 public class AddPatientAfter extends JPanel {
     String[] conditions = {"Normal", "Urgent", "Critical"};
     Hospital hospital;
@@ -16,26 +17,32 @@ public class AddPatientAfter extends JPanel {
         JPanel fieldsPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
+        // Labels
         JLabel operationLabel = new JLabel("Add Patient After Existing");
         JLabel existingIdLabel = new JLabel("Existing Patient ID:");
         JLabel titleLabel = new JLabel("New Patient ID:");
         JLabel nameLabel = new JLabel("New Patient Name:");
         JLabel conditionLabel = new JLabel("New Patient Condition:");
 
+        // Text fields
         JTextField existingIdField = new JTextField(15);
         JTextField idField = new JTextField(15);
         JTextField nameField = new JTextField(15);
 
+        // Combo box for condition
         JComboBox comboBox = new JComboBox(conditions);
         JButton addButton = new JButton("Add");
 
+        // Action listener for the add button
         addButton.addActionListener(e ->{
             String existingId = existingIdField.getText();
             String id = idField.getText();
             String name = nameField.getText();
             String condition = comboBox.getSelectedItem().toString();
 
+            // Check for empty fields
             if((existingId != null && !existingId.isEmpty()) && (id != null && !id.isEmpty()) && (name != null && !name.isEmpty()) && (condition != null && !condition.isEmpty())) {
+                // Check if patient exists
                 if (hospital.patientExists(existingId)){
                     hospital.AddPatientAfter(existingId, id, name, condition);
                     String output = ("Adding Patient: " + id + " " + name + " after " + existingId);
@@ -53,6 +60,8 @@ public class AddPatientAfter extends JPanel {
 
         gbc.insets = new Insets(10,10,10,10);
 
+        // Add components to the panel
+        // Change grid width to center operation label
         gbc.gridx=0;
         gbc.gridy=0;
         gbc.gridwidth = 2;
